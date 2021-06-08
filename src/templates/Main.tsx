@@ -9,15 +9,22 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => (
-  <div className="antialiased w-full font-sans">
+  <div className="antialiased w-full font-sans text-white">
     {/* Inject header metadata dynamically */}
     {props.meta}
 
     <NavBar>
-      <NavLink label="blogs" linkTo="/" />
-      <NavLink label="about" linkTo="/about" />
-      <NavLink label="contact" linkTo="/contact" />
-      {true && <NavLink label="Create Post" linkTo="/create_post" />}
+      <div className="flex-row justify-between">
+        <NavLink label="blogs" linkTo="/" />
+        <NavLink label="about" linkTo="/about" />
+        <NavLink label="contact" linkTo="/contact" />
+      </div>
+      {true && (
+      <div className="pt-10">
+        <p className="text-gray-600 text-xl border-b border-gray-600 ">Admin panel</p>
+        <NavLink label="Create Post" linkTo="/create_post" />
+      </div>
+      )}
     </NavBar>
 
     {/* Container for the content */}
