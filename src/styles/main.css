@@ -1,0 +1,33 @@
+@tailwind base;
+
+a {
+  @apply text-gray-600;
+}
+
+a:hover {
+  @apply text-red-900;
+}
+
+@tailwind components;
+
+@tailwind utilities;
+
+.content p {
+  @apply my-6;
+}
+
+.content ul {
+  @apply my-6;
+}
+
+.content-wrapper{
+  @apply py-14;
+  @apply max-w-xl;
+
+  @apply relative;
+  @apply ml-auto;
+  @apply mr-auto;
+}
+
+
+
