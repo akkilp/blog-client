@@ -1,10 +1,11 @@
+@import '~react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 @tailwind base;
 
-a {
+.clickable_link {
   @apply text-gray-600;
 }
 
-a:hover {
+.clickable_link:hover {
   @apply text-red-900;
 }
 
@@ -29,5 +30,15 @@ a:hover {
   @apply mr-auto;
 }
 
+.editor-class{
+  @apply w-full;
+  @apply h-full;
+  @apply bg-white;
+  @apply shadow-inner;
+  @apply shadow-lg;
+  @apply p-4;
+  @apply z-40;
+  @apply text-black;
+}
 
 

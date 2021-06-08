@@ -8,7 +8,8 @@ interface BlogListProps {
 }
 
 const BlogList = ({ dataList }: BlogListProps) => {
-  if (!dataList) return <p>Not found</p>;
+  if (!dataList) return <p>Couldnt fetch articles from server. Try again later.</p>;
+  if (dataList.length === 0) return <p>There are no articles currently.</p>;
 
   return (
     <>

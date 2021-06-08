@@ -20,7 +20,7 @@ const Post = ({ postData }: any) => {
 
   return (
     <Main meta={<Meta title={title} description={title} />}>
-      <article className="content-wrapper min-w-max">
+      <article className="content-wrapper min-w-max text-gray-900">
         <PostHeader data={{ id, ...headerData }} />
         <PostContent content={content} />
       </article>

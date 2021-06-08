@@ -24,20 +24,29 @@ const Index = ({ data }: any) => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await axios.get('http://localhost:3050/posts/');
+  try {
+    const { data } = await axios.get('http://localhost:3050/posts/');
 
-  const parsed = data.map((post: any) => ({
-    id: post.id,
-    date: getDate(post.created),
-    title: post.title,
-    categories: post.categories,
-  }));
+    const parsed = data.map((post: any) => ({
+      id: post.id,
+      date: getDate(post.created),
+      title: post.title,
+      categories: post.categories,
+    }));
 
-  return {
-    props: {
-      data: parsed,
-    },
-  };
+    return {
+      props: {
+        data: parsed,
+      },
+    };
+  } catch (error) {
+    console.log('Couldnt reach endpoint when fetching /posts.', error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
 };
 
 export default Index;
