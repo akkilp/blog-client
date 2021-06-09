@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
 import dynamic from 'next/dynamic';
 
 const Editor = dynamic(
@@ -21,7 +21,11 @@ export default class EditorComponent extends Component {
     this.setState({
       editorState,
     });
+    // Every time editors state is changed, the contents are converted into string-version
     // eslint-disable-next-line react/prop-types
+    this.props.handleContent(
+      convertToRaw(this.state.editorState.getCurrentContent()),
+    );
   };
 
   uploadImageCallBack = async (_file) => {

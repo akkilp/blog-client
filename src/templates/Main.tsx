@@ -4,7 +4,7 @@ import NavBar from '../components/NavBar';
 import NavLink from '../components/NavLink';
 
 type IMainProps = {
-  meta: ReactNode;
+  meta?: ReactNode;
   children: ReactNode;
 };
 

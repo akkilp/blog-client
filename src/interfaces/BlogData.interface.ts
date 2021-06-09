@@ -6,7 +6,7 @@ export interface BlogData {
 }
 
 export interface Category {
-  id: number;
-  numberOfPosts: number;
+  id?: number;
+  numberOfPosts?: number;
   name: string;
 }
