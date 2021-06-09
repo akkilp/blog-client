@@ -8,7 +8,7 @@ const Editor = dynamic(
   { ssr: false },
 );
 
-export default class ArticleEditor extends Component {
+export default class EditorComponent extends Component {
   constructor(props) {
     super(props);
 
