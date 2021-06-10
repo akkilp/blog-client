@@ -64,14 +64,10 @@ const WritePost: React.FC<WritePostProps> = () => {
       categories: state.categories,
       content: draftToHtml(state.body),
     };
-    cookieCutter.set('Authentication', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTYyMzI1MTg4OSwiZXhwIjoxNjIzMjUxOTQ5fQ.7UfWwjYZGSmNqZP6DkizQd8XmBZhsQ97Kfkx-racKQc;');
 
     try {
-      const response = await axios.post('http://localhost:3050/posts',
-        {
-          data: load,
-        });
-      console.log(response.data.body);
+      const response = await axios.post('http://localhost:3050/posts', load, { withCredentials: true });
+      console.log('Success', response.data.body);
     } catch (error) {
       console.log(error);
       console.log(cookieCutter.get('Authentication'));

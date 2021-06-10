@@ -9,7 +9,7 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => (
-  <div className="antialiased w-full font-sans text-black">
+  <div className="flex-row antialiased w-full font-sans text-black z-0">
     {/* Inject header metadata dynamically */}
     {props.meta}
 
