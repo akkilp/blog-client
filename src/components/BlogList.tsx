@@ -16,7 +16,7 @@ const BlogList = ({ dataList }: BlogListProps) => {
       <h1 className="text-3xl pb-4">Articles</h1>
       <ul>
         {dataList.map((post: BlogData) => (
-          <BlogSlug data={post} />
+          <BlogSlug key={post.id} data={post} />
         ))}
       </ul>
     </>
