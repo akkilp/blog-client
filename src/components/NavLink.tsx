@@ -8,11 +8,11 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ label, linkTo }: NavLinkProps) => (
-  <li className="my-3">
+  <div className="my-3">
     <Link href={linkTo}>
       <a className="text-gray-300 border-none hover:text-gray-700 capitalize">{label}</a>
     </Link>
-  </li>
+  </div>
 );
 
 export default NavLink;

@@ -70,7 +70,6 @@ const WritePost: React.FC<WritePostProps> = () => {
       console.log('Success', response.data.body);
     } catch (error) {
       console.log(error);
-      console.log(cookieCutter.get('Authentication'));
     }
   };
 
