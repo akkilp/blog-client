@@ -6,7 +6,7 @@ const CategoryMap = ({ categories }: Pick<BlogData, 'categories'>) => (
   <div>
     {categories
       && categories.map((category: Category) => (
-        <a className="mr-2" href={`/categories/${category}`}>
+        <a key={category.name} className="mr-2" href={`/categories/${category.name}`}>
           {category.name}
         </a>
       ))}

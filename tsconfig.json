@@ -34,5 +34,5 @@
     "isolatedModules": true
   },
   "exclude": ["./dist/**/*", "./node_modules/**/*"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx", "src/utils/stateFromHTML.js", "src/components/PostForm.jsx", "src/components/Editor.jsx"]
 }
