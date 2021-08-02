@@ -1,6 +1,11 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 
-import { EditorState, convertToRaw } from 'draft-js';
+import {
+  EditorState, convertToRaw, ContentState, convertFromHTML,
+} from 'draft-js';
 import dynamic from 'next/dynamic';
 
 const Editor = dynamic(
@@ -12,21 +17,16 @@ export default class EditorComponent extends Component {
   constructor(props) {
     super(props);
 
+    const content = ContentState.createFromText(props.editorState);
+
     this.state = {
-      editorState: EditorState.createEmpty(),
+      editorState: EditorState.createWithContent(content),
+    };
+
+    this.onChange = (editorState) => {
+      this.setState({ editorState });
     };
   }
-
-  onEditorStateChange = (editorState) => {
-    this.setState({
-      editorState,
-    });
-    // Every time editors state is changed, the contents are converted into string-version
-    // eslint-disable-next-line react/prop-types
-    this.props.handleContent(
-      convertToRaw(this.state.editorState.getCurrentContent()),
-    );
-  };
 
   uploadImageCallBack = async (_file) => {
     console.log('huutista');
@@ -40,7 +40,7 @@ export default class EditorComponent extends Component {
         toolbarClassName="toolbar-class"
         wrapperClassName="wrapper-class"
         editorClassName="editor-class"
-        onEditorStateChange={this.onEditorStateChange}
+        onEditorStateChange={this.onChange}
         // toolbarOnFocus
         toolbar={{
           options: ['inline', 'blockType', 'list', 'link', 'embedded', 'image', 'history'],

@@ -39,7 +39,7 @@ const Login: React.FC<LoginProps> = () => {
     try {
       const response = await axios.post(url, load, { withCredentials: true });
       console.log('Logged in succesfully!', response.data, response.status);
-      setTimeout(() => router.push('/'), 1500);
+      router.push('/');
     } catch (error) {
       console.log('Error occurred:', error);
     }

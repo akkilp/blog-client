@@ -3,6 +3,7 @@ import React, { ReactEventHandler } from 'react';
 interface TextInputProps{
   name: string;
   error?: any;
+  initValue?: string;
   onChange: any;
   placeholder?: any;
   variant?: 'small';
@@ -10,7 +11,7 @@ interface TextInputProps{
 }
 
 const TextInput: React.FC<TextInputProps> = ({
-  onChange, name, error, placeholder, variant, type = 'text',
+  onChange, name, error, placeholder, variant, initValue, type = 'text',
 }:TextInputProps) => (
   <div className={`w-full ${variant === 'small' && 'w-80'} px-3 mb-6 md:mb-0`}>
     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={name}>
@@ -20,6 +21,7 @@ const TextInput: React.FC<TextInputProps> = ({
         onChange={(e: React.FormEvent<HTMLInputElement>): void => {
           onChange(e);
         }}
+        value={initValue}
         id={name}
         name={name}
         type={type}
