@@ -1,17 +1,17 @@
 export const getDate = (date: string) => {
   const months = [
-    'January',
-    'February',
-    'March',
-    'April',
+    'Jan',
+    'Febr',
+    'Mar',
+    'Apr',
     'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
 
   const dateObject = new Date(date);

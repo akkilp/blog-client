@@ -51,7 +51,7 @@ const Main = (props: IMainProps) => {
       </NavBar>
 
       {/* Container for the content */}
-      <div className="md:ml-80 min-h-screen">{props.children}</div>
+      <div className="ml-0 lg:ml-80 min-h-screen">{props.children}</div>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 @import '~react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 @tailwind base;
 
+/* * { border: 1px solid red; }  */
+
 .clickable_link {
   @apply text-gray-600;
 }
@@ -22,12 +24,28 @@
 }
 
 .content-wrapper{
+  @apply p-6;
   @apply py-14;
-  @apply max-w-xl;
-
+  @apply max-w-4xl;
   @apply relative;
   @apply ml-auto;
   @apply mr-auto;
+}
+
+
+.content-wrapper img {
+  @apply m-auto;
+  @apply px-0;
+  @apply py-10;
+  @apply sm:px-4;
+  @apply max-w-full;
+}
+
+.content-wrapper pre {
+  @apply bg-gray-400;
+  @apply p-2;
+  @apply my-4;
+  @apply rounded-md;
 }
 
 .editor-class{

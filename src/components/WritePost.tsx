@@ -87,8 +87,30 @@ const WritePost: React.FC<FormProps> = ({
     }
   };
 
-  const uploadImageCallBack = async (_file: any) => {
-    console.log('huutista');
+  const uploadImageCallBack = async (file: any) => {
+    const targetUrl = `${process.env.NEXT_PUBLIC_IMG_HOST_IP}?key=${process.env.NEXT_PUBLIC_IMG_HOST_KEY}`;
+
+    const getBase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject('Error: ', error);
+    });
+
+    const base64File = await getBase64(file);
+
+    const response = await axios.post(targetUrl, base64File, {
+      headers: {
+        'Content-Type': 'text/plain',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+        'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+      },
+    });
+    console.log('RESPONSE:', response);
+    console.log(base64File);
+    console.log(targetUrl);
+    console.log(file);
   };
 
   const submitForm = async (event:any) => {
@@ -132,8 +154,6 @@ const WritePost: React.FC<FormProps> = ({
           history: { inDropdown: true },
           image: {
             urlEnabled: true,
-            uploadEnabled: true,
-            uploadCallback: uploadImageCallBack,
             previewImage: true,
             alt: { present: false, mandatory: false },
           },

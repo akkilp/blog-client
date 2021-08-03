@@ -6,7 +6,7 @@ interface PostContentProps {
 
 const PostContent: React.FC<PostContentProps> = ({ content }: PostContentProps) => (
   // eslint-disable-next-line react/no-danger
-  <div className="" dangerouslySetInnerHTML={{ __html: content }} />
+  <div dangerouslySetInnerHTML={{ __html: content }} />
 );
 
 export default PostContent;
