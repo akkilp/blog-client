@@ -13,7 +13,7 @@ const UpdatePost = ({ postData }: any) => (
     <section className="w-full h-full min-h-screen p-10 ">
       <h1 className="text-4xl pb-8">Edit post</h1>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <WritePost {...postData} />
+      <WritePost {...postData} update />
     </section>
   </Main>
 );

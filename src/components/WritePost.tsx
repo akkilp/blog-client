@@ -1,3 +1,5 @@
+import { pid } from 'process';
+
 import React from 'react';
 
 import axios from 'axios';
@@ -6,7 +8,7 @@ import {
 } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import dynamic from 'next/dynamic';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 
 import { Category } from '../interfaces/BlogData.interface';
 import CategoryInput from './CategoryInput';
@@ -23,15 +25,20 @@ export interface FormProps {
   title?: string;
   categories?: [] | Category[];
   isDraft?: boolean;
+  update: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const WritePost: React.FC<FormProps> = ({
-  content = '', title = '', categories = [], isDraft = true,
+  content = '', title = '', categories = [], isDraft = true, update = false,
 }: FormProps) => {
   const [state, setState] = React.useState<FormProps>({
-    content, title, categories, isDraft,
+    content, title, categories, isDraft, update,
   });
+
+  const url = useRouter();
+  const { id } = url.query;
+  console.log(id, url.query);
 
   /*   React.useEffect(() => {
     console.log(state);
@@ -87,30 +94,25 @@ const WritePost: React.FC<FormProps> = ({
     }
   };
 
-  const uploadImageCallBack = async (file: any) => {
-    const targetUrl = `${process.env.NEXT_PUBLIC_IMG_HOST_IP}?key=${process.env.NEXT_PUBLIC_IMG_HOST_KEY}`;
+  const createPost = async (payload: any) => {
+    try {
+      const response = await axios.post('http://localhost:3050/posts', payload, { withCredentials: true });
+      console.log('Post created succesfully', response.data.id);
+      router.push(`/posts/${response.data.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const getBase64 = (file) => new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject('Error: ', error);
-    });
-
-    const base64File = await getBase64(file);
-
-    const response = await axios.post(targetUrl, base64File, {
-      headers: {
-        'Content-Type': 'text/plain',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
-        'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-      },
-    });
-    console.log('RESPONSE:', response);
-    console.log(base64File);
-    console.log(targetUrl);
-    console.log(file);
+  const updatePost = async (payload: any, pid: int) => {
+    console.log(pid, 'päi');
+    try {
+      const response = await axios.patch(`http://localhost:3050/posts/${pid}`, payload, { withCredentials: true });
+      console.log('Post updated succesfully', response.data.id);
+      router.push(`/posts/${response.data.id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const submitForm = async (event:any) => {
@@ -123,14 +125,12 @@ const WritePost: React.FC<FormProps> = ({
       content: draftToHtml(rawEditorData),
     };
 
-    console.log(payload);
-
-    try {
-      const response = await axios.post('http://localhost:3050/posts', payload, { withCredentials: true });
-      console.log('Success', response.data.id);
-      router.push(`/posts/${response.data.id}`);
-    } catch (error) {
-      console.log(error);
+    if (update) {
+      console.log(id);
+      const toInt = parseInt(id);
+      await updatePost(payload, toInt);
+    } else {
+      await createPost(payload);
     }
   };
 
