@@ -3,10 +3,11 @@ import React from 'react';
 interface ButtonProps{
   label: string;
   onClick: any;
+  className?:string;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick }: ButtonProps) => (
-  <button type="button" className="bg-blue-500 mx-1 hover:bg-blue-700 text-white mb-3 font-bold py-3 px-4 rounded" onClick={onClick}>{label}</button>
+const Button: React.FC<ButtonProps> = ({ label, onClick, className }: ButtonProps) => (
+  <button type="button" className={`bg-gray-700 mx-1 capitalize hover:bg-gray-600 text-white mb-3 font-bold py-3 px-4 rounded ${className}`} onClick={onClick}>{label}</button>
 
 );
 

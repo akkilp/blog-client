@@ -1,3 +1,4 @@
+import console from 'console';
 import { title } from 'process';
 
 import React from 'react';
@@ -6,6 +7,7 @@ import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
+import DisqusComments from '../../components/DisqusComment';
 import PostContent from '../../components/PostContent';
 import PostHeader from '../../components/PostHeader';
 import { Meta } from '../../layout/Meta';
@@ -17,12 +19,13 @@ const Post = ({ postData }: any) => {
   const { id } = router.query;
 
   const { content, ...headerData } = postData;
-
   return (
     <Main meta={<Meta title={title} description={title} />}>
-      <article className="content-wrapper min-w-ma text-gray-900">
+      <article className="content-wrapper min-w-max text-gray-900">
         <PostHeader data={{ id, ...headerData }} />
         <PostContent content={content} />
+        <div className="border-b-4 border-gray-700 w-full pt-12 pl-12 rounded-md mb-12" />
+        <DisqusComments id={id} title={headerData.title} />
       </article>
     </Main>
   );

@@ -126,7 +126,8 @@ const WritePost: React.FC<FormProps> = ({
     };
 
     if (update) {
-      console.log(id);
+      console.log('Updating post', id);
+      // eslint-disable-next-line radix
       const toInt = parseInt(id);
       await updatePost(payload, toInt);
     } else {
