@@ -16,7 +16,7 @@ const BlogSlug = ({ data }: BlogSlugProps) => {
 
   return (
     <Link href={`/posts/${id}`}>
-      <div className="hover:bg-gray-200 transition duration-200 hover:scale-125 flex-row p-4 border-gray-700 border-b-2 text-gray-900 text-lg p-5 cursor-pointer">
+      <div className="hover:bg-gray-200 transition duration-200 hover:scale-125 flex-row border-gray-700 border-b-2 text-gray-900 text-lg p-5 cursor-pointer">
         <h2 className="text-xl  ">{title}</h2>
         <div className="flex justify-between text-md pt-1">
           <CategoryMap categories={categories} />

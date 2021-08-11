@@ -1,5 +1,5 @@
-import console from 'console';
 import process, { title } from 'process';
+import { ParsedUrlQuery } from 'querystring';
 
 import React from 'react';
 
@@ -16,7 +16,7 @@ import { getDate } from '../../utils/getDate';
 
 const Post = ({ postData }: any) => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id }:ParsedUrlQuery = router.query;
 
   const { content, ...headerData } = postData;
   return (
@@ -25,7 +25,7 @@ const Post = ({ postData }: any) => {
         <PostHeader data={{ id, ...headerData }} />
         <PostContent content={content} />
         <div className="border-b-2 border-gray-500 w-11/12 pt-12 pl-12 mb-12 mx-auto" />
-        <DisqusComments id={id} title={headerData.title} />
+        <DisqusComments id={id as string} title={headerData.title} />
       </article>
     </Main>
   );

@@ -5,10 +5,8 @@ import React from 'react';
 import axios from 'axios';
 import router from 'next/router';
 
-import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import { Main } from '../templates/Main';
-import { Config } from '../utils/Config';
 
 interface LoginProps{
 

@@ -6,7 +6,7 @@ import React from 'react';
 
 import axios from 'axios';
 import {
-  Formik, Form, useField,
+  Formik, Form,
 } from 'formik';
 import * as Yup from 'yup';
 
@@ -52,11 +52,11 @@ const Contact = () => {
       <section className="content-wrapper">
         <h2 className="text-3xl p-3 border-l-4 border-gray-700 text-gray-700 font-medium">Contact</h2>
 
-        <p className="text-lg py-8 px-4">A question raised? Let's get in touch.</p>
+        <p className="text-lg py-8 px-4">A question raised? Let´s get in touch.</p>
         <Formik
           initialValues={defaultValues}
           validationSchema={validationOptions}
-          onSubmit={async (values, actions) => {
+          onSubmit={async (values) => {
             try {
               await axios.post(`${process.env.NEXT_PUBLIC_API}/mail`, values);
               handleAlert('Message succesfully sent. I will be in touch.');

@@ -3,13 +3,13 @@ import React from 'react';
 import { DiscussionEmbed } from 'disqus-react';
 
 interface DisqusProps {
-  id: number;
+  id: string;
   title: string;
 }
 
-const DisqusComments = ({ id, title }: any) => {
+const DisqusComments = ({ id, title }: DisqusProps) => {
   const disqusShortname = 'Kilpo';
-  const disqusConfig = {
+  const disqusConfig: any = {
     url: `lolloroo/${id}`,
     identifier: id, // Single post id
     title, // Single post title

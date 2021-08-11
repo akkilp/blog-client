@@ -1,11 +1,9 @@
-import process, { title } from 'process';
-
 import React from 'react';
 
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 
-import WritePost, { FormProps } from '../../../components/WritePost';
+import WritePost from '../../../components/WritePost';
 import { Main } from '../../../templates/Main';
 
 const UpdatePost = ({ postData }: any) => (
@@ -30,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     );
 
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/posts/${context.params.id}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/posts/${context?.params?.id as string | undefined}`);
 
     if (response?.data) {
       const postData = {

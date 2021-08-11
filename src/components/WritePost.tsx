@@ -1,4 +1,5 @@
-import { pid } from 'process';
+/* eslint-disable no-alert */
+/* eslint-disable no-restricted-globals */
 
 import React from 'react';
 
@@ -10,7 +11,6 @@ import draftToHtml from 'draftjs-to-html';
 import dynamic from 'next/dynamic';
 import router, { useRouter } from 'next/router';
 
-import { Category } from '../interfaces/BlogData.interface';
 import Button from './Button';
 import CategoryInput from './CategoryInput';
 import TextInput from './TextInput';
@@ -22,11 +22,11 @@ const Editor = dynamic(
 );
 
 export interface FormProps {
-  content?: any;
+  content?: any & { children?: React.ReactNode }
   title?: string;
-  categories?: [] | Category[];
+  categories?: any;
   isDraft?: boolean;
-  update: boolean;
+  update?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -48,10 +48,8 @@ const WritePost: React.FC<FormProps> = ({
     // Creating
     if (state.content === '') {
       setState({ ...state, content: EditorState.createEmpty() });
-    }
-
-    // Editing
-    else {
+    } else {
+      // Updating
       /*
         Post is saved as markdown.
         Hence blocks must be first tranformed to raw JS, blocks and
@@ -86,7 +84,7 @@ const WritePost: React.FC<FormProps> = ({
   };
 
   const handleCategoryDelete = (category:any) => {
-    const updatedCategories = state.categories?.filter((current) => current.name !== category);
+    const updatedCategories = state.categories?.filter((current: any) => current.name !== category);
     if (updatedCategories?.length === 0) {
       setState({ ...state, categories: [] });
     } else {
@@ -104,7 +102,7 @@ const WritePost: React.FC<FormProps> = ({
     }
   };
 
-  const updatePost = async (payload: any, pid: int) => {
+  const updatePost = async (payload: any, pid: number) => {
     try {
       const response = await axios.patch(`${process.env.NEXT_PUBLIC_API}/posts/${pid}`, payload, { withCredentials: true });
       console.log('Post updated succesfully', response.data.id);
@@ -140,7 +138,7 @@ const WritePost: React.FC<FormProps> = ({
     if (update) {
       console.log('Updating post', id);
       // eslint-disable-next-line radix
-      const toInt = parseInt(id);
+      const toInt = parseInt(id as string);
       await updatePost(payload, toInt);
     } else {
       await createPost(payload);
@@ -152,6 +150,7 @@ const WritePost: React.FC<FormProps> = ({
       <TextInput name="title" initValue={state.title} onChange={handleInputs} />
       <CategoryInput name="categories" categories={state.categories} handleAdd={handleCategoryAdd} handleDelete={handleCategoryDelete} />
       <Editor
+        // @ts-ignore
         editorState={state.content}
         onEditorStateChange={onEditorChange}
         toolbarClassName="toolbar-class"
