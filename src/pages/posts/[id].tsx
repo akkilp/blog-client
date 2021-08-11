@@ -21,10 +21,10 @@ const Post = ({ postData }: any) => {
   const { content, ...headerData } = postData;
   return (
     <Main meta={<Meta title={title} description={title} />}>
-      <article className="content-wrapper min-w-max text-gray-900">
+      <article className="content-wrapper text-gray-900">
         <PostHeader data={{ id, ...headerData }} />
         <PostContent content={content} />
-        <div className="border-b-4 border-gray-700 w-full pt-12 pl-12 rounded-md mb-12" />
+        <div className="border-b-2 border-gray-500 w-11/12 pt-12 pl-12 mb-12 mx-auto" />
         <DisqusComments id={id} title={headerData.title} />
       </article>
     </Main>

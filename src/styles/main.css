@@ -17,6 +17,8 @@
 
 .content p {
   @apply my-6;
+  @apply max-w-2xl;
+
 }
 
 .content ul {
@@ -26,7 +28,7 @@
 .content-wrapper{
   @apply p-6;
   @apply py-14;
-  @apply max-w-4xl;
+  @apply max-w-2xl;
   @apply relative;
   @apply ml-auto;
   @apply mr-auto;
@@ -37,7 +39,7 @@
   @apply px-0;
   @apply py-10;
   @apply sm:px-4;
-  @apply max-w-full;
+
 }
 
 .dynamic-content h2 {
@@ -47,9 +49,9 @@
 } 
 
 .dynamic-content h3 {
-    @apply text-xl;
-    @apply pt-8;
-    @apply font-semibold;
+  @apply text-xl;
+  @apply pt-8;
+  @apply font-semibold;
 }
 
 .dynamic-content p {
@@ -106,9 +108,40 @@
   @apply text-black;
 }
 
+.alert-footer {
+  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;	
+}
+
 .chip{
   @apply text-gray-900;
   @apply bg-yellow-600;
+}
+
+.pseudoDecoration {
+  @apply z-20;
+}
+
+.pseudoDecoration::after {
+  position:absolute;
+  content: ""; 
+  width: 450px;
+  height: 100%;
+  @apply bg-gray-700;
+  top: 30px;
+  left: 50px;
+  @apply opacity-0 md:opacity-100;
+}
+
+.pseudoDecoration::before {
+  position:absolute;
+  content: ""; 
+  width: 450px;
+  height: 100%;
+  @apply bg-gray-500;
+  top: -30px;
+  right: 50px;
+  @apply opacity-0 md:opacity-100;
 }
 
 

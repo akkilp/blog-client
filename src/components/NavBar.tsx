@@ -19,7 +19,7 @@ const NavBar = ({ children }: NavBarProps) => {
       <div className={`lg:invisible visible ${showIcon ? 'fixed' : 'absolute'} fill-current text-gray-700 z-50 right-14 top-4 w-10 h-10`} onClick={handleShow}>
         <MenuIcon />
       </div>
-      <nav className={`${showIcon ? 'visible' : 'invisible'} lg:visible w-screen h-screen lg:px-12 lg:pt-14 lg:justify-between fixed lg:w-80 z-10 bg-black text-xl p-2`}>
+      <nav className={`${showIcon ? 'visible' : 'invisible'} lg:visible w-screen h-screen lg:px-12 lg:pt-14 lg:justify-between fixed lg:w-80 z-40 bg-black text-xl p-2`}>
         <div className="flex flex-col h-full">
           <Link href="/">
             <div className="lg:mb-12 cursor-pointer">

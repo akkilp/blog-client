@@ -13,7 +13,7 @@ interface TextInputProps{
 const TextInput: React.FC<TextInputProps> = ({
   onChange, name, error, placeholder, styles, initValue, type = 'text',
 }:TextInputProps) => (
-  <div className={`w-full ${styles} px-3 mb-6 md:mb-0`}>
+  <div className={`max-w-lg ${styles} px-3 mb-6 md:mb-0`}>
     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={name}>
       {name}
       <input

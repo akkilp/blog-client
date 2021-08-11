@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic';
 import router, { useRouter } from 'next/router';
 
 import { Category } from '../interfaces/BlogData.interface';
+import Button from './Button';
 import CategoryInput from './CategoryInput';
 import TextInput from './TextInput';
 
@@ -115,6 +116,19 @@ const WritePost: React.FC<FormProps> = ({
     }
   };
 
+  const handleDelete = async () => {
+    const confirmed = confirm(`Are you sure you wanna delete post " ${state.title} "?`);
+    if (!confirmed) return;
+
+    try {
+      await axios.delete(`http://localhost:3050/posts/${id}`, { withCredentials: true });
+      console.log('Post deleted succesfully');
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const submitForm = async (event:any) => {
     event.preventDefault();
     const rawEditorData = convertToRaw(state.content?.getCurrentContent());
@@ -160,14 +174,19 @@ const WritePost: React.FC<FormProps> = ({
           },
         }}
       />
-
-      <button
-        className="bg-blue-500 mx-3 hover:bg-blue-700 text-white mt-3 font-bold py-3 px-4 rounded"
-        type="submit"
-      >
-        Submit
-
-      </button>
+      <div className="flex flex-row justify-between">
+        <Button className="mt-4 w-40" label={update ? 'edit' : 'post'} type="submit" />
+        {update
+        && (
+        <Button
+          className="mt-4 w-40
+        bg-red-900"
+          label="delete"
+          type="button"
+          onClick={handleDelete}
+        />
+        )}
+      </div>
     </form>
   );
 };
