@@ -13,7 +13,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ data }: PostHeaderProps) => {
     <div className="flex-row">
       <h1 className="text-4xl ">{title}</h1>
       <div className="flex justify-between mt-6">
-        <time>{date}</time>
+        <time className="font-medium text-gray-700">{date}</time>
         <CategoryMap categories={categories} />
       </div>
     </div>

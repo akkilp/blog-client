@@ -1,3 +1,5 @@
+import { pid } from 'process';
+
 import React from 'react';
 
 import axios from 'axios';
@@ -6,9 +8,10 @@ import {
 } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import dynamic from 'next/dynamic';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 
 import { Category } from '../interfaces/BlogData.interface';
+import Button from './Button';
 import CategoryInput from './CategoryInput';
 import TextInput from './TextInput';
 
@@ -23,15 +26,19 @@ export interface FormProps {
   title?: string;
   categories?: [] | Category[];
   isDraft?: boolean;
+  update: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const WritePost: React.FC<FormProps> = ({
-  content = '', title = '', categories = [], isDraft = true,
+  content = '', title = '', categories = [], isDraft = true, update = false,
 }: FormProps) => {
   const [state, setState] = React.useState<FormProps>({
-    content, title, categories, isDraft,
+    content, title, categories, isDraft, update,
   });
+
+  const url = useRouter();
+  const { id } = url.query;
 
   /*   React.useEffect(() => {
     console.log(state);
@@ -87,8 +94,37 @@ const WritePost: React.FC<FormProps> = ({
     }
   };
 
-  const uploadImageCallBack = async (_file: any) => {
-    console.log('huutista');
+  const createPost = async (payload: any) => {
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/posts`, payload, { withCredentials: true });
+      console.log('Post created succesfully', response.data.id);
+      router.push(`/posts/${response.data.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updatePost = async (payload: any, pid: int) => {
+    try {
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API}/posts/${pid}`, payload, { withCredentials: true });
+      console.log('Post updated succesfully', response.data.id);
+      router.push(`/posts/${response.data.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmed = confirm(`Are you sure you wanna delete post " ${state.title} "?`);
+    if (!confirmed) return;
+
+    try {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API}/posts/${id}`, { withCredentials: true });
+      console.log('Post deleted succesfully');
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const submitForm = async (event:any) => {
@@ -101,14 +137,13 @@ const WritePost: React.FC<FormProps> = ({
       content: draftToHtml(rawEditorData),
     };
 
-    console.log(payload);
-
-    try {
-      const response = await axios.post('http://localhost:3050/posts', payload, { withCredentials: true });
-      console.log('Success', response.data.id);
-      router.push(`/posts/${response.data.id}`);
-    } catch (error) {
-      console.log(error);
+    if (update) {
+      console.log('Updating post', id);
+      // eslint-disable-next-line radix
+      const toInt = parseInt(id);
+      await updatePost(payload, toInt);
+    } else {
+      await createPost(payload);
     }
   };
 
@@ -132,21 +167,24 @@ const WritePost: React.FC<FormProps> = ({
           history: { inDropdown: true },
           image: {
             urlEnabled: true,
-            uploadEnabled: true,
-            uploadCallback: uploadImageCallBack,
             previewImage: true,
             alt: { present: false, mandatory: false },
           },
         }}
       />
-
-      <button
-        className="bg-blue-500 mx-3 hover:bg-blue-700 text-white mt-3 font-bold py-3 px-4 rounded"
-        type="submit"
-      >
-        Submit
-
-      </button>
+      <div className="flex flex-row justify-between">
+        <Button className="mt-4 w-40" label={update ? 'edit' : 'post'} type="submit" />
+        {update
+        && (
+        <Button
+          className="mt-4 w-40
+        bg-red-900"
+          label="delete"
+          type="button"
+          onClick={handleDelete}
+        />
+        )}
+      </div>
     </form>
   );
 };

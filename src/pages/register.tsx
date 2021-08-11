@@ -32,7 +32,7 @@ const Register: React.FC<RegisterProps> = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const url = `${Config.backend}/authentication/register`;
+    const url = `${process.env.NEXT_PUBLIC_API}/authentication/register`;
     const load = {
       name: state.username,
       password: state.password,

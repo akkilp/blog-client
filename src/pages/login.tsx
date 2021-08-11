@@ -1,3 +1,5 @@
+import process from 'process';
+
 import React from 'react';
 
 import axios from 'axios';
@@ -31,7 +33,7 @@ const Login: React.FC<LoginProps> = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const url = `${Config.backend}/authentication/login`;
+    const url = `${process.env.NEXT_PUBLIC_API}/authentication/login`;
     const load = {
       password: state.password,
       email: state.email,

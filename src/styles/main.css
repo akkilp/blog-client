@@ -1,6 +1,8 @@
 @import '~react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 @tailwind base;
 
+/* * { border: 1px solid red; }  */
+
 .clickable_link {
   @apply text-gray-600;
 }
@@ -15,6 +17,8 @@
 
 .content p {
   @apply my-6;
+  @apply max-w-2xl;
+
 }
 
 .content ul {
@@ -22,12 +26,75 @@
 }
 
 .content-wrapper{
+  @apply p-6;
   @apply py-14;
-  @apply max-w-xl;
-
+  @apply max-w-2xl;
   @apply relative;
   @apply ml-auto;
   @apply mr-auto;
+}
+
+.dynamic-content img {
+  @apply m-auto;
+  @apply px-0;
+  @apply py-10;
+  @apply sm:px-4;
+
+}
+
+.dynamic-content h2 {
+  @apply text-3xl;
+  @apply pt-16;
+  @apply font-semibold;
+} 
+
+.dynamic-content h3 {
+  @apply text-xl;
+  @apply pt-8;
+  @apply font-semibold;
+}
+
+.dynamic-content p {
+  @apply tracking-normal;
+  @apply text-lg;
+  @apply mt-4;
+  @apply leading-9;
+}
+
+.dynamic-content blockquote {
+  @apply p-3;
+  @apply mt-4;
+  
+  @apply border-l-4;
+  @apply border-gray-800;
+  @apply italic;
+  @apply text-xl;
+}
+
+.dynamic-content blockquote + p {
+  @apply m-0;
+  @apply ml-4;
+  @apply pb-2;
+  @apply text-lg;
+  
+
+}
+
+.dynamic-content blockquote::before {
+  content: "“";
+}
+
+.dynamic-content blockquote::after {
+  content: "”";
+}
+
+
+
+.dynamic-content pre {
+  @apply bg-gray-400;
+  @apply p-2;
+  @apply my-4;
+  @apply rounded-md;
 }
 
 .editor-class{
@@ -41,9 +108,40 @@
   @apply text-black;
 }
 
+.alert-footer {
+  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;	
+}
+
 .chip{
   @apply text-gray-900;
   @apply bg-yellow-600;
+}
+
+.pseudoDecoration {
+  @apply z-20;
+}
+
+.pseudoDecoration::after {
+  position:absolute;
+  content: ""; 
+  width: 450px;
+  height: 100%;
+  @apply bg-gray-700;
+  top: 30px;
+  left: 50px;
+  @apply opacity-0 md:opacity-100;
+}
+
+.pseudoDecoration::before {
+  position:absolute;
+  content: ""; 
+  width: 450px;
+  height: 100%;
+  @apply bg-gray-500;
+  top: -30px;
+  right: 50px;
+  @apply opacity-0 md:opacity-100;
 }
 
 

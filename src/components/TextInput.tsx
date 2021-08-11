@@ -6,14 +6,14 @@ interface TextInputProps{
   initValue?: string;
   onChange: any;
   placeholder?: any;
-  variant?: 'small';
+  styles?: string;
   type?: 'password' | 'text';
 }
 
 const TextInput: React.FC<TextInputProps> = ({
-  onChange, name, error, placeholder, variant, initValue, type = 'text',
+  onChange, name, error, placeholder, styles, initValue, type = 'text',
 }:TextInputProps) => (
-  <div className={`w-full ${variant === 'small' && 'w-80'} px-3 mb-6 md:mb-0`}>
+  <div className={`max-w-lg ${styles} px-3 mb-6 md:mb-0`}>
     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={name}>
       {name}
       <input
@@ -28,7 +28,7 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={placeholder}
       />
     </label>
-    {error && <p className="text-red-500 text-xs italic">Please fill out this field.</p>}
+    {error && <p className="text-red-500 text-sm italic">Please fill out this field.</p>}
   </div>
 );
 

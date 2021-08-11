@@ -1,4 +1,9 @@
+import process from 'process';
+
 import React, { ReactNode } from 'react';
+
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 import { userIsLogged } from '../api/userIsLogged';
 import NavBar from '../components/NavBar';
@@ -12,6 +17,9 @@ type IMainProps = {
 const Main = (props: IMainProps) => {
   const [logged, data] = userIsLogged();
 
+  const router = useRouter();
+  const { id } = router.query;
+
   return (
     <div className="flex-row antialiased w-full font-sans text-black z-0">
       {/* Inject header metadata dynamically */}
@@ -19,7 +27,7 @@ const Main = (props: IMainProps) => {
 
       <NavBar>
         <div className="flex-column justify-between">
-          <NavLink label="blogs" linkTo="/" />
+          <NavLink label="blog" linkTo="/" />
           <NavLink label="about" linkTo="/about" />
           <NavLink label="contact" linkTo="/contact" />
 
@@ -29,6 +37,11 @@ const Main = (props: IMainProps) => {
             <div className="pt-10">
               <p className="text-gray-600 text-xl border-b border-gray-600 ">Admin panel</p>
               <NavLink label="Create Post" linkTo="/create_post" />
+              {id && (
+                <>
+                  <NavLink label="Edit Post" linkTo={`/posts/update/${id}`} />
+                </>
+              )}
             </div>
           )}
         </div>
@@ -42,7 +55,20 @@ const Main = (props: IMainProps) => {
                 {data?.name}
                 .
                 {' '}
-                <a>Log out</a>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      await axios.post(`${process.env.NEXT_PUBLIC_API}/authentication/logout`, { withCredentials: true });
+                      document.cookie = 'Authentication=; HttpOnly; Path=/; Max-Age=0';
+                    } catch (err) {
+                      console.log(err);
+                    }
+                  }}
+                >
+                  Log out
+
+                </button>
               </p>
             )
             : <a href="/login">Login as admin</a>}
@@ -51,7 +77,11 @@ const Main = (props: IMainProps) => {
       </NavBar>
 
       {/* Container for the content */}
-      <div className="md:ml-80 min-h-screen">{props.children}</div>
+
+      <div className="ml-0 lg:ml-80 min-h-screen">
+        {props.children}
+      </div>
+
     </div>
   );
 };
