@@ -1,5 +1,3 @@
-import process from 'process';
-
 import React from 'react';
 
 import axios from 'axios';
