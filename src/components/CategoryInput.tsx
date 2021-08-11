@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Chip from '@bit/mui-org.material-ui.chip';
+import Chip from '@material-ui/core/Chip';
 
 import Button from './Button';
 
