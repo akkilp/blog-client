@@ -46,7 +46,7 @@ const Meta = (props: IMetaProps) => (
         description: props.description,
         url: props.canonical,
         locale: Config.locale,
-        site_name: Config.site_name,
+        site_name: 'kilpo blog',
       }}
     />
   </>

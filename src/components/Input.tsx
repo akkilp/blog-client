@@ -3,10 +3,6 @@ import React from 'react';
 
 import { useField } from 'formik';
 
-interface InputProps{
-
-}
-
 const Input = (props:any) => {
   const [field, meta] = useField(props);
 
