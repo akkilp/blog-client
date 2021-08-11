@@ -1,5 +1,5 @@
 import console from 'console';
-import { title } from 'process';
+import process, { title } from 'process';
 
 import React from 'react';
 
@@ -32,7 +32,7 @@ const Post = ({ postData }: any) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const { data } = await axios.get(`http://localhost:3050/posts/${params.id}`);
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/posts/${params.id}`);
 
   const postData = {
     content: data.content,
@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axios.get('http://localhost:3050/posts/');
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/posts/`);
 
   const paths = data.map((post: any) => ({
     /* Id must be converted to string, or raises error */

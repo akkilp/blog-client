@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     // Check whether the user is logged in
     await axios.get(
-      'http://localhost:3050/authentication',
+      `${process.env.NEXT_PUBLIC_API}/authentication`,
       {
         withCredentials: true,
         // Cookies are attached to the request with context
@@ -40,14 +40,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         permanent: false,
       },
     };
-
-    /*     console.log('Something unexpected happened, returning to login.');
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    }; */
   }
 };
 

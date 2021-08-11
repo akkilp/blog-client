@@ -1,3 +1,5 @@
+import process from 'process';
+
 import React from 'react';
 
 import axios from 'axios';
@@ -25,7 +27,7 @@ const Index = ({ data }: any) => (
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const { data } = await axios.get('http://localhost:3050/posts/');
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/posts/`);
 
     const parsed = data.map((post: any) => ({
       id: post.id,

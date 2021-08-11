@@ -1,5 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
+import process from 'process';
+
 import React from 'react';
 
 import axios from 'axios';
@@ -56,7 +58,7 @@ const Contact = () => {
           validationSchema={validationOptions}
           onSubmit={async (values, actions) => {
             try {
-              await axios.post('http://localhost:3050/mail', values);
+              await axios.post(`${process.env.NEXT_PUBLIC_API}/mail`, values);
               handleAlert('Message succesfully sent. I will be in touch.');
             } catch (err) {
               handleAlert('Error occurred in sending message. Try again.');

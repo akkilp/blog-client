@@ -7,7 +7,7 @@ import useSWR from 'swr';
 const fetcher = (url) => axios.get(url, { withCredentials: true }).then((res) => res.data);
 
 export const userIsLogged = () => {
-  const { data, error } = useSWR('http://localhost:3050/authentication/', fetcher, {
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/authentication/`, fetcher, {
     onErrorRetry: (err) => {
       // Dont retry request, when error status is unauthorized
       // eslint-disable-next-line no-useless-return

@@ -10,7 +10,7 @@ interface DisqusProps {
 const DisqusComments = ({ id, title }: any) => {
   const disqusShortname = 'Kilpo';
   const disqusConfig = {
-    url: `http://localhost:8080/posts/${id}`,
+    url: `lolloroo/${id}`,
     identifier: id, // Single post id
     title, // Single post title
   };

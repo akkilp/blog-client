@@ -39,7 +39,6 @@ const WritePost: React.FC<FormProps> = ({
 
   const url = useRouter();
   const { id } = url.query;
-  console.log(id, url.query);
 
   /*   React.useEffect(() => {
     console.log(state);
@@ -97,7 +96,7 @@ const WritePost: React.FC<FormProps> = ({
 
   const createPost = async (payload: any) => {
     try {
-      const response = await axios.post('http://localhost:3050/posts', payload, { withCredentials: true });
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/posts`, payload, { withCredentials: true });
       console.log('Post created succesfully', response.data.id);
       router.push(`/posts/${response.data.id}`);
     } catch (error) {
@@ -106,9 +105,8 @@ const WritePost: React.FC<FormProps> = ({
   };
 
   const updatePost = async (payload: any, pid: int) => {
-    console.log(pid, 'päi');
     try {
-      const response = await axios.patch(`http://localhost:3050/posts/${pid}`, payload, { withCredentials: true });
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API}/posts/${pid}`, payload, { withCredentials: true });
       console.log('Post updated succesfully', response.data.id);
       router.push(`/posts/${response.data.id}`);
     } catch (error) {
@@ -121,7 +119,7 @@ const WritePost: React.FC<FormProps> = ({
     if (!confirmed) return;
 
     try {
-      await axios.delete(`http://localhost:3050/posts/${id}`, { withCredentials: true });
+      await axios.delete(`${process.env.NEXT_PUBLIC_API}/posts/${id}`, { withCredentials: true });
       console.log('Post deleted succesfully');
       router.push('/');
     } catch (error) {

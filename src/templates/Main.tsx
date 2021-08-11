@@ -1,3 +1,5 @@
+import process from 'process';
+
 import React, { ReactNode } from 'react';
 
 import axios from 'axios';
@@ -57,7 +59,7 @@ const Main = (props: IMainProps) => {
                   type="button"
                   onClick={async () => {
                     try {
-                      await axios.post('http://localhost:3050/authentication/logout', { withCredentials: true });
+                      await axios.post(`${process.env.NEXT_PUBLIC_API}/authentication/logout`, { withCredentials: true });
                       document.cookie = 'Authentication=; HttpOnly; Path=/; Max-Age=0';
                     } catch (err) {
                       console.log(err);

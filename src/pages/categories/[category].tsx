@@ -1,3 +1,5 @@
+import process from 'process';
+
 import React from 'react';
 
 import axios from 'axios';
@@ -24,7 +26,7 @@ const CategoryPosts = ({ data, category }: any) => (
 );
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const { data } = await axios.get(`http://localhost:3050/categories/${params.category}`);
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/categories/${params.category}`);
 
   const parsed = data.posts.map((post: any) => ({
     id: post.id,
@@ -37,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axios.get('http://localhost:3050/categories/');
+  const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API}/categories/`);
 
   const paths = data.map((category: any) => ({
     /* Id must be converted to string, or raises error */

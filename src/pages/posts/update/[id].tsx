@@ -1,4 +1,4 @@
-import { title } from 'process';
+import process, { title } from 'process';
 
 import React from 'react';
 
@@ -19,11 +19,10 @@ const UpdatePost = ({ postData }: any) => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context.params);
   try {
     // Check whether the user is logged in
     await axios.get(
-      'http://localhost:3050/authentication',
+      `${process.env.NEXT_PUBLIC_API}/authentication`,
       {
         withCredentials: true,
         // Cookies are attached to the request with context
@@ -31,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     );
 
-    const response = await axios.get(`http://localhost:3050/posts/${context.params.id}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API}/posts/${context.params.id}`);
 
     if (response?.data) {
       const postData = {
@@ -57,14 +56,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         permanent: false,
       },
 
-    };
-
-    console.log('Something unexpected happened, returning to login.');
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
     };
   }
 };

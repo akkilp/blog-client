@@ -43,7 +43,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
             placeholder={placeholder}
             value={state}
           />
-          <Button label="Add" onClick={handleClick} />
+          <Button type="button" label="Add" onClick={handleClick} />
           {categories?.length > 0 && categories.map((category: any) => (
             <div key={category.name} className="mb-3 ml-3 capitalize">
               <Chip
