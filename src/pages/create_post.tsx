@@ -18,6 +18,7 @@ const CreatePost: React.FC<CreatePostProps> = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log('tämmösetä tulee täältä tänään');
   console.log(context.req.headers);
   try {
     // Check whether the user is logged in
