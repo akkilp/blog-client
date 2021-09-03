@@ -1,6 +1,7 @@
 import React from 'react';
 
 import axios from 'axios';
+import cookie from 'cookie';
 import { GetServerSideProps } from 'next';
 
 import WritePost from '../components/WritePost';
@@ -20,10 +21,14 @@ const CreatePost: React.FC<CreatePostProps> = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const url = `${process.env.NEXT_PUBLIC_API}/authentication`;
 
+  function parseCookies(req: any) {
+    return cookie.parse(req ? req.headers.cookie || '' : document.cookie);
+  }
   try {
     await fetch(url, {
       method: 'GET',
       credentials: 'include',
+      headers: parseCookies(context.req),
     });
     // Check whether the user is logged in
     /*     await axios.get(

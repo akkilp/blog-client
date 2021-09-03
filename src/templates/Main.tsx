@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 /* import { userIsLogged } from '../api/userIsLogged'; */
+import { userIsLogged } from '../api/userIsLogged';
 import NavBar from '../components/NavBar';
 import NavLink from '../components/NavLink';
 
@@ -15,9 +16,8 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => {
-/*   const [logged, data] = userIsLogged(); */
-  const logged = false;
-  const data = { name: 'filler' };
+  const [logged, data] = userIsLogged();
+
   const router = useRouter();
   const { id } = router.query;
 
