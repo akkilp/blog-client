@@ -15,8 +15,9 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => {
-  const [logged, data] = userIsLogged();
-
+/*   const [logged, data] = userIsLogged(); */
+  const logged = false;
+  const data = { name: 'filler' };
   const router = useRouter();
   const { id } = router.query;
 

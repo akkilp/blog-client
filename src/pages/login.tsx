@@ -41,7 +41,7 @@ const Login: React.FC<LoginProps> = () => {
       console.log('Logged in succesfully!', response.data, response.status);
       router.push('/');
     } catch (error) {
-      console.log('Error occurred:', error);
+      console.log('Error occurred while sending login data:', error);
     }
   };
 

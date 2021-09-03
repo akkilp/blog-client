@@ -20,26 +20,21 @@ const CreatePost: React.FC<CreatePostProps> = () => (
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
-    const cookies = nookies.get(context);
-
-    console.log(cookies);
-    console.log('hommeleita:', context.req.headers?.cookie);
     // Check whether the user is logged in
-    const respons = await axios.get(
+    await axios.get(
       `${process.env.NEXT_PUBLIC_API}/authentication`,
       {
         withCredentials: true,
         // Cookies are attached to the request with context
-        headers: context.req ? { cookie: context.req.headers?.cookie || '' } : { cookie: '' },
+        headers: context.req ? { cookie: context.req.headers.cookie } : undefined,
       },
     );
-
-    console.log('läpi tulloo!!!', respons);
 
     return {
       props: {},
     };
   } catch (err) {
+    console.log('pärähti vituiks', err);
     return {
       redirect: {
         destination: '/login',
