@@ -1,5 +1,3 @@
-import React from 'react';
-
 import axios from 'axios';
 import useSWR from 'swr';
 
@@ -14,12 +12,6 @@ export const userIsLogged = () => {
       if (err.status === 401) return;
     },
   });
-  const [logged, setLogged] = React.useState<boolean>(false);
 
-  React.useEffect(() => {
-    if (!data || error) setLogged(false);
-    else setLogged(true);
-  }, [data, error]);
-
-  return [logged, data, error];
+  return [data, error];
 };

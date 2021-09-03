@@ -16,7 +16,7 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => {
-  const [logged, data] = userIsLogged();
+  const [data] = userIsLogged();
 
   const router = useRouter();
   const { id } = router.query;
@@ -33,7 +33,7 @@ const Main = (props: IMainProps) => {
           <NavLink label="contact" linkTo="/contact" />
 
           {/* Render admin toolbar if logged in */}
-          {logged
+          {(data)
           && (
             <div className="pt-10">
               <p className="text-gray-600 text-xl border-b border-gray-600 ">Admin panel</p>
@@ -48,7 +48,7 @@ const Main = (props: IMainProps) => {
         </div>
 
         <div className="text-white text-xs ">
-          {logged
+          {(data)
             ? (
               <p>
                 Logged in as

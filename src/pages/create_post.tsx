@@ -11,10 +11,10 @@ interface CreatePostProps {}
 const CreatePost: React.FC<CreatePostProps> = () => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [logged, data, error] = userIsLogged();
+  const [data, error] = userIsLogged();
 
   React.useEffect(() => {
-    if (error || !logged || !data) {
+    if (error || !data) {
       router.push('/login');
     }
   }, []);
@@ -22,7 +22,7 @@ const CreatePost: React.FC<CreatePostProps> = () => {
   return (
     <Main>
       <section className="w-full h-full min-h-screen p-10 ">
-        {logged ? (
+        {(!error && data) ? (
           <>
             <h1 className="text-4xl pb-8">Create a post</h1>
             <WritePost />
