@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/semi */
 import React from 'react';
 
 import axios from 'axios';
@@ -20,6 +23,21 @@ const CreatePost: React.FC<CreatePostProps> = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log('tämmösetä tulee täältä tänään');
   console.log(context.req.headers);
+  async function getHeaders(ctx: any) {
+    if (ctx?.req?.cookies) {
+      const cookieItems = []
+      for (let key of Object.keys(ctx?.req?.cookies)) {
+        cookieItems.push(`${key}=${ctx.req.cookies[key]}`)
+      }
+      return {
+        cookie: cookieItems.join('; '),
+      }
+    }
+
+    return {
+    }
+  }
+
   try {
     // Check whether the user is logged in
     await axios.get(
@@ -27,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       {
         withCredentials: true,
         // Cookies are attached to the request with context
-        headers: context.req ? { cookie: context.req.headers?.cookie || '' } : { cookie: '' },
+        headers: getHeaders(context),
       },
     );
 
