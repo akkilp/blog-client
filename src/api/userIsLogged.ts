@@ -21,5 +21,5 @@ export const userIsLogged = () => {
     else setLogged(true);
   }, [data, error]);
 
-  return [logged, data];
+  return [logged, data, error];
 };

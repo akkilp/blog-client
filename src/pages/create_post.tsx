@@ -1,56 +1,36 @@
 import React from 'react';
 
-import cookie from 'cookie';
-import { GetServerSideProps } from 'next';
+import router from 'next/router';
 
+import { userIsLogged } from '../api/userIsLogged';
 import WritePost from '../components/WritePost';
 import { Main } from '../templates/Main';
 
 interface CreatePostProps {}
 
-const CreatePost: React.FC<CreatePostProps> = () => (
-  <Main>
-    <section className="w-full h-full min-h-screen p-10 border-red-700 border-2">
-      <h1 className="text-4xl pb-8"> Create a post</h1>
-      <WritePost />
-    </section>
-  </Main>
-);
+const CreatePost: React.FC<CreatePostProps> = () => {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [logged, data, error] = userIsLogged();
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const url = `${process.env.NEXT_PUBLIC_API}/authentication`;
-
-  function parseCookies(req: any) {
-    return cookie.parse(req ? req.headers.cookie || '' : document.cookie);
+  if (error) {
+    router.push('/login');
   }
-  try {
-    await fetch(url, {
-      method: 'GET',
-      credentials: 'include',
-      headers: parseCookies(context.req),
-    });
-    // Check whether the user is logged in
-    /*     await axios.get(
-      url,
-      {
-        withCredentials: true,
-        // Cookies are attached to the request with context
-        headers: context.req ? { cookie: context.req.headers.cookie } : undefined,
-      },
-    ); */
 
-    return {
-      props: {},
-    };
-  } catch (err) {
-    console.log('pärähti vituiks', err);
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
+  return (
+    <Main>
+      <section className="w-full h-full min-h-screen p-10 ">
+        {logged ? (
+          <>
+            <h1 className="text-4xl pb-8">Create a post</h1>
+            <WritePost />
+          </>
+        ) : (
+          <h2>Loading...</h2>
+        )}
+      </section>
+    </Main>
+  );
 };
 
 export default CreatePost;
