@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       {
         withCredentials: true,
         // Cookies are attached to the request with context
-        headers: context.req ? { cookie: context.req.headers?.cookie } : undefined,
+        headers: context.req ? { cookie: context.req.headers?.cookie || '' } : { cookie: '' },
       },
     );
 

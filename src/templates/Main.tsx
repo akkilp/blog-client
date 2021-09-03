@@ -60,7 +60,7 @@ const Main = (props: IMainProps) => {
                   onClick={async () => {
                     try {
                       await axios.post(`${process.env.NEXT_PUBLIC_API}/authentication/logout`, { withCredentials: true });
-                      document.cookie = 'Authentication=; HttpOnly; Path=/; Max-Age=0';
+                      router.push('/');
                     } catch (err) {
                       console.log(err);
                     }

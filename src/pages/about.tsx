@@ -11,7 +11,7 @@ const About = () => (
     <section className="content-wrapper">
       <h2 className="text-3xl p-3 border-l-4 border-gray-700 text-gray-700 font-medium">About</h2>
       <div className="relative w-full my-10 sm:px-20 h-full rounded-2xl z-20 pseudoDecoration">
-        <Image className="z-10" src="/picture_of_me.png" alt="Picture of me" quality={100} width={828} height={820} layout="responsive" />
+        <Image className="z-10" src="/picture_of_me.png" alt="Picture of me" quality={100} width={1047} height={935} layout="responsive" />
       </div>
       <div className="text-xl p-2 sm:p-6">
         <p className="pb-4 text-2xl font-semibold">
