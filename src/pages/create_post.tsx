@@ -18,16 +18,22 @@ const CreatePost: React.FC<CreatePostProps> = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const url = `${process.env.NEXT_PUBLIC_API}/authentication`;
+
   try {
+    await fetch(url, {
+      method: 'GET',
+      credentials: 'include',
+    });
     // Check whether the user is logged in
-    await axios.get(
-      `${process.env.NEXT_PUBLIC_API}/authentication`,
+    /*     await axios.get(
+      url,
       {
         withCredentials: true,
         // Cookies are attached to the request with context
         headers: context.req ? { cookie: context.req.headers.cookie } : undefined,
       },
-    );
+    ); */
 
     return {
       props: {},
