@@ -13,9 +13,11 @@ const CreatePost: React.FC<CreatePostProps> = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [logged, data, error] = userIsLogged();
 
-  if (error) {
-    router.push('/login');
-  }
+  React.useEffect(() => {
+    if (error || !logged) {
+      router.push('/login');
+    }
+  }, []);
 
   return (
     <Main>
