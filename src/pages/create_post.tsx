@@ -1,6 +1,5 @@
 import React from 'react';
 
-import axios from 'axios';
 import cookie from 'cookie';
 import { GetServerSideProps } from 'next';
 

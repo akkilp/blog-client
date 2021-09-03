@@ -2,7 +2,6 @@ import process from 'process';
 
 import React, { ReactNode } from 'react';
 
-/* import axios from 'axios'; */
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
