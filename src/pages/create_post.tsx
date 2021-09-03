@@ -14,7 +14,7 @@ const CreatePost: React.FC<CreatePostProps> = () => {
   const [logged, data, error] = userIsLogged();
 
   React.useEffect(() => {
-    if (error || !logged) {
+    if (error || !logged || !data) {
       router.push('/login');
     }
   }, []);
