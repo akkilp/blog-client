@@ -5,7 +5,7 @@ import React, { ReactNode } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-import { userIsLogged } from '../api/userIsLogged';
+/* import { userIsLogged } from '../api/userIsLogged'; */
 import NavBar from '../components/NavBar';
 import NavLink from '../components/NavLink';
 

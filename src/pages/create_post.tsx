@@ -2,7 +2,6 @@ import React from 'react';
 
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
-import nookies from 'nookies';
 
 import WritePost from '../components/WritePost';
 import { Main } from '../templates/Main';
