@@ -59,8 +59,8 @@ const Main = (props: IMainProps) => {
                   type="button"
                   onClick={async () => {
                     try {
-                      await axios.post(`${process.env.NEXT_PUBLIC_API}/authentication/logout`, { withCredentials: true });
-                      router.push('/');
+                      await axios.post(`${process.env.NEXT_PUBLIC_API}/authentication/logout`, {}, { withCredentials: true });
+                      router.reload();
                     } catch (err) {
                       console.log(err);
                     }
